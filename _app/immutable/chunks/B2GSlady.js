@@ -1,0 +1,1 @@
+import{l as o,u as l,d as t,e as u,f as a}from"./OtuxeAnn.js";function s(e){t===null&&o(),a&&t.l!==null?c(t).m.push(e):l(()=>{const n=u(e);if(typeof n=="function")return n})}function c(e){var n=e.l;return n.u??={a:[],b:[],m:[]}}export{s as o};
