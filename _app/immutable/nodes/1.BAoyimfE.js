@@ -1,1 +1,0 @@
-import{f as a,a as t}from"../chunks/DpfIF5fs.js";import"../chunks/CFbzh5oF.js";var i=a('<div><h1>Error</h1> <a href="/">Go to login page</a></div>');function m(o){var r=i();t(o,r)}export{m as component};
