@@ -10,8 +10,10 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"deploy": "gh-pages -d build"
 	},
+	"homepage": "https://mrakjos.github.io/swingdj2",
 	"files": [
 		"dist",
 		"!dist/**/*.test.*",
@@ -36,6 +38,7 @@
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.39.1",
 		"@sveltejs/adapter-auto": "^7.0.0",
+		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.49.1",
 		"@sveltejs/package": "^2.5.7",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
@@ -45,6 +48,7 @@
 		"eslint": "^9.39.1",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.13.1",
+		"gh-pages": "^6.3.0",
 		"globals": "^16.5.0",
 		"prettier": "^3.7.4",
 		"prettier-plugin-svelte": "^3.4.0",

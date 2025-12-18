@@ -3,7 +3,12 @@ import type { LayoutLoad } from './$types';
 import { getAllMyPlaylists, getMe } from '$lib/spotify/api';
 
 export const load: LayoutLoad = async () => {
-  const token = sessionStorage.getItem('spotify_access_token');
+  let token = null;
+
+  if (typeof window !== 'undefined') {
+    token = sessionStorage.getItem('spotify_access_token');
+  }
+
   if (!token) {
     return {}
   };
