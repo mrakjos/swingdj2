@@ -1,16 +1,21 @@
 <script lang="ts">
-	// import './layout.css';
+  // import './layout.css';
 
-	const { children } = $props();
+  const { children } = $props();
 </script>
 
-<header>
-  <h1>Welcome to Swing DJ 2</h1>
-</header>
+<div style="max-width: 1100px; margin: 40px auto; font-family: system-ui;">
+  <header>
+    <h1>Welcome to Swing DJ 2</h1>
+  </header>
 
-{@render children()}
+  <main>
+    {@render children()}
+  </main>
 
-<footer>
-  <p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
-</footer>
+  <footer>
+    <p>
+      Visit project <a href="https://github.com/mrakjos/swingdj2/">https://github.com/mrakjos/swingdj2/</a>
+    </p>
+  </footer>
+</div>

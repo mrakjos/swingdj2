@@ -1,3 +1,5 @@
+import type { Track } from '../../routes/app/components/types.ts';
+
 type SpotifyPlaylist = { id: string; name: string; tracks: { total: number } };
 type Paging<T> = { items: T[]; next: string | null };
 
@@ -33,23 +35,40 @@ export async function getAllMyPlaylists(accessToken: string) {
   return all;
 }
 
-export async function getAllPlaylistTracks(accessToken: string, playlistId: string) {
-  const tracks: Array<{ uri: string; duration_ms: number }> = [];
+export async function getAllPlaylistTracks(accessToken: string, playlistId: string): Promise<Track[]> {
+  const tracks: Array<Track> = [];
 
   let url =
     `${SPOTIFY_API_URI}/playlists/${playlistId}/tracks` +
-    `?limit=100&fields=items(track(uri,duration_ms,is_local)),next`;
+    `?limit=100&fields=items(track(uri,name,artists(name),duration_ms,is_local)),next`;
 
   while (url) {
     const page = await spotifyFetch<{
-      items: Array<{ track: { uri: string; duration_ms: number; is_local?: boolean } | null }>;
+      items: Array<{
+        track: {
+          uri: string;
+          name: string;
+          artists: Array<{ name: string }>;
+          duration_ms: number;
+          is_local?: boolean;
+        } | null;
+      }>;
       next: string | null;
     }>(accessToken, url);
 
     for (const it of page.items) {
       const t = it.track;
-      if (!t?.uri || t.is_local) continue;
-      tracks.push({ uri: t.uri, duration_ms: t.duration_ms });
+      if (!t?.uri || t.is_local) {
+        continue;
+      }
+      tracks.push({
+
+        uri: t.uri,
+        name: t.name,
+        artists: (t.artists ?? []).map((a) => a.name),
+        duration_ms: t.duration_ms,
+        sourcePlaylistId: playlistId
+      });
     }
 
     url = page.next || '';
@@ -57,7 +76,6 @@ export async function getAllPlaylistTracks(accessToken: string, playlistId: stri
 
   return tracks;
 }
-
 
 async function getAllPlaylistTrackUris(accessToken: string, playlistId: string) {
   const uris: string[] = [];
